@@ -2,32 +2,27 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Stack;
 import java.util.StringTokenizer;
 
-public class boj6198 {
+public class boj5086 {
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringBuilder sb = new StringBuilder();
 		
-		int N = Integer.parseInt(br.readLine());
-		Stack<Long> stk = new Stack<>();
-		long sum = 0;
-		for(int i=0; i<N; i++) {
-			long num = Long.parseLong(br.readLine());
+		while(true) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int a = Integer.parseInt(st.nextToken());
+			int b = Integer.parseInt(st.nextToken());
+			if(a == 0 && b == 0) break;
 			
-			while(!stk.isEmpty() && stk.peek() <= num) {
-				stk.pop();
-			}
-			
-			sum += stk.size();
-			stk.push(num);
+			if(b % a == 0) sb.append("factor\n");
+			else if(a % b == 0) sb.append("multiple\n");
+			else sb.append("neither\n");
 		}
 		
-		bw.write(sum+"");
+		bw.write(sb.toString());
 		bw.flush();
 		bw.close();
-		
 	}
 }
