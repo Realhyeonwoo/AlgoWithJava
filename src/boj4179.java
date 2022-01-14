@@ -8,7 +8,8 @@ import java.util.Queue;
 import java.util.StringTokenizer;
 
 class Pose {
-	int y, x;
+	int y;
+	int x;
 	Pose(int y, int x) {
 		this.y = y;
 		this.x = x;
