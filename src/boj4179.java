@@ -6,23 +6,15 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
-
-class Pose {
-	int y;
-	int x;
-	Pose(int y, int x) {
-		this.y = y;
-		this.x = x;
-	}
-}
+import studyAlgo.*;
 
 public class boj4179 {
 	static int R, C;
 	static int[][] fireMap;
 	static char[][] arr;
 	static boolean[][] visited;
-	static Queue<Pose> q = new LinkedList<>();
-	static Queue<Pose> fireQ = new LinkedList<>();
+	static Queue<Pos> q = new LinkedList<>();
+	static Queue<Pos> fireQ = new LinkedList<>();
 	
 	static int[] dy = {0, 0, 1, -1};
 	static int[] dx = {1, -1, 0, 0};
@@ -45,11 +37,11 @@ public class boj4179 {
 			for(int j=0; j<C; j++) {
 				arr[i][j] = str.charAt(j);
 				if(arr[i][j] == 'F') {
-					fireQ.add(new Pose(i, j));
+					fireQ.add(new Pos(i, j));
 					fireMap[i][j] = 0;
 				}
 				if(arr[i][j] == 'J') {
-					q.add(new Pose(i, j));
+					q.add(new Pos(i, j));
 					visited[i][j] = true;
 				}
 			}
@@ -59,7 +51,7 @@ public class boj4179 {
 		while(!fireQ.isEmpty()) {
 			int qSize = fireQ.size();
 			for(int i=0; i<qSize; i++) {
-				Pose p = fireQ.poll();
+				Pos p = fireQ.poll();
 				int y = p.y;
 				int x = p.x;
 				
@@ -70,7 +62,7 @@ public class boj4179 {
 					if(ny<0 || ny>=R || nx<0 || nx>=C) continue;
 					if(fireMap[ny][nx] >= 0 || arr[ny][nx] == '#') continue;
 					fireMap[ny][nx] = fireTime;
-					fireQ.add(new Pose(ny, nx));
+					fireQ.add(new Pos(ny, nx));
 				}
 			}
 			fireTime++;
@@ -87,7 +79,7 @@ public class boj4179 {
 		while(!q.isEmpty()) {
 			int qSize = q.size();
 			for(int i=0; i<qSize; i++) {
-				Pose p = q.poll();
+				Pos p = q.poll();
 				int y = p.y;
 				int x = p.x;
 				
@@ -104,7 +96,7 @@ public class boj4179 {
 					if(fireMap[ny][nx] != -1 && fireMap[ny][nx] <= time) continue;
 					
 					visited[ny][nx] = true;
-					q.add(new Pose(ny, nx));
+					q.add(new Pos(ny, nx));
 				}
 			}
 			time++;

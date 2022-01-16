@@ -4,14 +4,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
-
-class Pos {
-	int y, x;
-	Pos(int y, int x) {
-		this.y = y;
-		this.x = x;
-	}
-}
+import studyAlgo.*;
 
 public class boj2580 {
 	
