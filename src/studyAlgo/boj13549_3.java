@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class boj13549 {
+public class boj13549_3 {
 	static class Pos {
 		int n, time;
 
@@ -17,35 +17,46 @@ public class boj13549 {
 			this.time = time;
 		}
 	}
-	
+
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringBuilder sb = new StringBuilder();
 
 		int MAX_SIZE = 100000;
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		int N = Integer.parseInt(st.nextToken());
 		int K = Integer.parseInt(st.nextToken());
-		boolean[] visited = new boolean[MAX_SIZE + 1];
+		int[] visited = new int[MAX_SIZE + 1];
 
-		int ans = Integer.MAX_VALUE;
 		Queue<Pos> q = new LinkedList<>();
-		q.add(new Pos(N, 0));
+		q.add(new Pos(N, 1));
+		visited[N] = 1;
+
 		while (!q.isEmpty()) {
 			Pos p = q.poll();
-			visited[p.n] = true;
-			if(p.n == K)
-				ans = Math.min(ans, p.time);
+
+			if (p.n - 1 >= 0) {
+				if(visited[p.n-1] == 0 || visited[p.n-1] > p.time+1) {
+					visited[p.n-1] = p.time + 1;
+					q.add(new Pos(p.n-1, p.time+1));
+				}
+			}
 			
-			if(p.n * 2 <= MAX_SIZE && !visited[p.n * 2])
-				q.add(new Pos(p.n*2, p.time));
-			if(p.n + 1 <= MAX_SIZE && !visited[p.n + 1])
-				q.add(new Pos(p.n+1, p.time+1));
-			if(p.n - 1 >= 0 && !visited[p.n - 1])
-				q.add(new Pos(p.n-1, p.time+1));
+			if (p.n + 1 <= MAX_SIZE) {
+				if(visited[p.n+1] == 0 || visited[p.n+1] > p.time+1) {
+					visited[p.n+1] = p.time + 1;
+					q.add(new Pos(p.n+1, p.time+1));
+				}
+			}
+
+			if (p.n * 2 <= MAX_SIZE) {
+				if(visited[p.n*2] == 0 || visited[p.n*2] > p.time) {
+					visited[p.n*2] = p.time;
+					q.add(new Pos(p.n*2, p.time));
+				}
+			}
 		}
 		
-		System.out.println(ans);
+		System.out.println(visited[K]-1);
 	}
 }
