@@ -9,64 +9,64 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class boj9466 {
+	static int NOT_VISITED = 0;
+	static int IN_CYCLE = -1;
 	static int n;
-	static int[] arr = new int[100000 + 1];
-	static boolean[] visited = new boolean[100000 + 1];
-	static boolean[] tempVisited = new boolean[100000 + 1];
+	static int[] arr;
+	static int[] visited;
 	static ArrayList<Integer> list = new ArrayList<>();
-	
+
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringBuilder sb = new StringBuilder();
-		
+
 		int T = Integer.parseInt(br.readLine());
-		for(int tc=1; tc<=T; tc++) {
+		for (int tc = 1; tc <= T; tc++) {
 			// INPUT
 			n = Integer.parseInt(br.readLine());
+			arr = new int[n + 1];
+			visited = new int[n + 1];
+
 			StringTokenizer st = new StringTokenizer(br.readLine());
-			for(int i=1; i<=n; i++)
+			for (int i = 1; i <= n; i++)
 				arr[i] = Integer.parseInt(st.nextToken());
-			Arrays.fill(visited, false);
-			
+			Arrays.fill(visited, NOT_VISITED);
+
 			// SIMULATION
-			for(int i=1; i<=n; i++) {
-				if(visited[i]) continue;
-				Arrays.fill(tempVisited, false);
-				
+			for (int i = 1; i <= n; i++) {
+				if (visited[i] == NOT_VISITED)
+					isCycle(i);
 			}
 
 			// OUTPUT
 			int cnt = 0;
-			for(int i=1; i<=n; i++) {
-				if(!visited[i]) cnt++;
+			for (int i = 1; i <= n; i++) {
+				if (visited[i] != IN_CYCLE)
+					cnt++;
 			}
-			System.out.println(cnt);
+			sb.append(cnt + "\n"); 
 		}
+		bw.write(sb.toString());
+		bw.flush();
+		bw.close();
 	}
 
-	private static boolean isCycle(int start, int i) {
-		if(start == arr[start]) {
-			tempVisited[start] = true;
-			return true;
-		}
-		
-		int now = i;
-		int next = arr[now];
-		tempVisited[now] = true;
+	private static void isCycle(int start) {
+		int cur = start;
 		while(true) {
-			if(start == next) {
-				tempVisited[start] = true;
-				tempVisited[next] = true;
-				return true;
-			}
+			visited[cur] = start;
+			cur = arr[cur];
 			
-			if(tempVisited[next]) return false;
-			tempVisited[next] = true;
-				
-			now = arr[now];
-			next = arr[arr[now]];
+			if(visited[cur] == start) {
+				while(visited[cur] != IN_CYCLE) {
+					visited[cur] = IN_CYCLE;
+					cur = arr[cur];
+				}
+				return;
+			} else if(visited[cur] != NOT_VISITED) {
+				return;
+			}
 		}
 	}
 }
-
