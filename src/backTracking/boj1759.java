@@ -46,7 +46,7 @@ public class boj1759 {
 						 if(arr[i] == vowels[j]) cnt++;
 				}
 			}
-			if(cnt != l && cnt >= 1)
+			if(cnt != l && cnt >= 1 && l-cnt>=2)
 				sb.append(str + "\n");
 			return;
 		}
