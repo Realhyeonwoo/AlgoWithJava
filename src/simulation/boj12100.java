@@ -13,7 +13,6 @@ public class boj12100 {
 	static int N;
 	static int[][] arr;
 	static int ans = Integer.MIN_VALUE;
-	static int temp;
 
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -25,7 +24,7 @@ public class boj12100 {
 			StringTokenizer st = new StringTokenizer(br.readLine());
 			for (int j = 0; j < N; j++) {
 				arr[i][j] = Integer.parseInt(st.nextToken());
-			}
+			}	
 		}
 
 		backTracking(0);
@@ -35,7 +34,6 @@ public class boj12100 {
 
 	private static void backTracking(int depth) {
 		if (depth == 5) {
-			temp++;
 			int[][] cloneMap = new int[N][N];
 			for (int i = 0; i < N; i++)
 				cloneMap[i] = arr[i].clone();
