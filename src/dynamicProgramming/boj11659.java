@@ -16,7 +16,7 @@ public class boj11659 {
 		int N = Integer.parseInt(st.nextToken());
 		int M = Integer.parseInt(st.nextToken());
 		int[] arr = new int[N+1];
-		int[] dp = new int[1001];
+		int[] dp = new int[100000+1];
 		st = new StringTokenizer(br.readLine());
 		for(int i=1; i<=N; i++) {
 			arr[i] = Integer.parseInt(st.nextToken());
