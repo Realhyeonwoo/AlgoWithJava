@@ -24,167 +24,133 @@ public class boj14891 {
 			int num = Integer.parseInt(st.nextToken()) - 1;
 			int dir = Integer.parseInt(st.nextToken());
 			
-			int[] tempArr = new int[8];
 			switch(num) {
 			case 0:
 				if(gears[0][2] != gears[1][6]) {
 					if(dir == 1) {
-						for(int i=0; i<7; i++)
-							tempArr[i+1] = gears[0][i];
-						tempArr[0] = gears[0][7];
-						for(int i=0; i<8; i++)
-							gears[0][i] = tempArr[i];
-						
-						for(int i=0; i<7; i++)
-							tempArr[i] = gears[1][i+1];
-						tempArr[7] = gears[1][0];
-						for(int i=0; i<8; i++)
-							gears[1][i] = tempArr[i];
-						
+						if(gears[1][2] != gears[2][6]) {
+							if(gears[2][2] != gears[3][6]) {
+								moveReverseClockDirection(3);
+							}
+							moveClockDirection(2);
+						}
+						moveReverseClockDirection(1);
 					} else if(dir == -1) {
-						for(int i=0; i<7; i++)
-							tempArr[i] = gears[0][i+1];
-						tempArr[7] = gears[0][0];
-						for(int i=0; i<8; i++)
-							gears[0][i] = tempArr[i];
-						
-						for(int i=0; i<7; i++)
-							tempArr[i+1] = gears[1][i];
-						tempArr[0] = gears[1][7];
-						for(int i=0; i<8; i++)
-							gears[1][i] = tempArr[i];
+						if(gears[1][2] != gears[2][6]) {
+							if(gears[2][2] != gears[3][6]) {
+								moveClockDirection(3);
+							}
+							moveReverseClockDirection(2);
+						}
+						moveClockDirection(1);
 					}
+				}
+				if(dir == 1) {
+					moveClockDirection(0);
+					 
+				} else {
+					moveReverseClockDirection(0);
+					
 				}
 				break;
 			case 1:
-				tempArr = new int[8];
 				if(gears[1][2] != gears[2][6]) {
 					if(dir == 1) {
-						for(int i=0; i<7; i++)
-							tempArr[i] = gears[2][i+1];
-						tempArr[7] = gears[2][0];
-						for(int i=0; i<8; i++)
-							gears[2][i] = tempArr[i];
+						if(gears[2][2] != gears[3][6]) {
+							moveClockDirection(3);
+						}
+						moveReverseClockDirection(2);
 					} else if(dir == -1) {
-						for(int i=0; i<7; i++)
-							tempArr[i+1] = gears[2][i];
-						tempArr[0] = gears[2][7];
-						for(int i=0; i<8; i++)
-							gears[2][i] = tempArr[i];
+						if(gears[2][2] != gears[3][6]) {
+							moveReverseClockDirection(3);
+						}
+						moveClockDirection(2);
 					}
 				}
-				
 				if(gears[1][6] != gears[0][2]) {
 					if(dir == 1) {
-						for(int i=0; i<7; i++)
-							tempArr[i] = gears[0][i+1];
-						tempArr[7] = gears[0][0];
-						for(int i=0; i<8; i++)
-							gears[0][i] = tempArr[i];
+						moveReverseClockDirection(0);
 					} else if(dir == -1) {
-						for(int i=0; i<7; i++)
-							tempArr[i+1] = gears[0][i];
-						tempArr[0] = gears[0][7];
-						for(int i=0; i<8; i++)
-							gears[0][i] = tempArr[i];
+						moveClockDirection(0);
 					}
 				}
-				
 				if(dir == 1) {
-					for(int i=0; i<7; i++)
-						tempArr[i+1] = gears[1][i];
-					tempArr[0] = gears[1][7];
-					for(int i=0; i<8; i++)
-						gears[1][i] = tempArr[i];
-				} else if(dir == -1) {
-					for(int i=0; i<7; i++)
-						tempArr[i] = gears[1][i+1];
-					tempArr[7] = gears[1][0];
-					for(int i=0; i<8; i++)
-						gears[1][i] = tempArr[i];
+					moveClockDirection(1);
+					
+				} else {
+					moveReverseClockDirection(1);
 				}
 				break;
 			case 2:
-				tempArr = new int[8];
-				
 				if(gears[2][2] != gears[3][6]) {
 					if(dir == 1) {
-						for(int i=0; i<7; i++)
-							tempArr[i] = gears[3][i+1];
-						tempArr[7] = gears[3][0];
-						for(int i=0; i<8; i++)
-							gears[3][i] = tempArr[i];
+						moveReverseClockDirection(3);
 					} else if(dir == -1) {
-						for(int i=0; i<7; i++)
-							tempArr[i+1] = gears[3][i];
-						tempArr[0] = gears[3][7];
-						for(int i=0; i<8; i++)
-							gears[3][i] = tempArr[i];
+						moveClockDirection(3);
 					}
 				}
 				
 				if(gears[2][6] != gears[1][2]) {
 					if(dir == 1) {
-						for(int i=0; i<7; i++)
-							tempArr[i] = gears[1][i+1];
-						tempArr[7] = gears[1][0];
-						for(int i=0; i<8; i++)
-							gears[1][i] = tempArr[i];
+						if(gears[1][6] != gears[0][2]) {
+							moveClockDirection(0);
+						}
+						moveReverseClockDirection(1);
 					} else if(dir == -1) {
-						for(int i=0; i<7; i++)
-							tempArr[i+1] = gears[1][i];
-						tempArr[0] = gears[1][7];
-						for(int i=0; i<8; i++)
-							gears[1][i] = tempArr[i];
+						if(gears[1][6] != gears[0][2]) {
+							moveReverseClockDirection(0);
+						}
+						moveClockDirection(1);
 					}
 				}
-			
 				if(dir == 1) {
-					for(int i=0; i<7; i++)
-						tempArr[i+1] = gears[2][i];
-					tempArr[0] = gears[2][7];
-					for(int i=0; i<8; i++)
-						gears[2][i] = tempArr[i];
-				} else if(dir == -1) {
-					for(int i=0; i<7; i++)
-						tempArr[i] = gears[2][i+1];
-					tempArr[7] = gears[2][0];
-					for(int i=0; i<8; i++)
-						gears[2][i] = tempArr[i];
+					moveClockDirection(2);
+					
+				} else {
+					moveReverseClockDirection(2);
 				}
 				break;
 			case 3:
-				tempArr = new int[8];
 				if(gears[3][6] != gears[2][2]) {
 					if(dir == 1) {
-						for(int i=0; i<7; i++)
-							tempArr[i+1] = gears[3][i];
-						tempArr[0] = gears[3][7];
-						for(int i=0; i<8; i++)
-							gears[3][i] = tempArr[i];
-						
-						for(int i=0; i<7; i++)
-							tempArr[i] = gears[2][i+1];
-						tempArr[7] = gears[2][0];
-						for(int i=0; i<8; i++)
-							gears[2][i] = tempArr[i];
+						if(gears[2][6] != gears[1][2]) {
+							if(gears[1][6] != gears[0][2]) {
+								moveReverseClockDirection(0);
+							}
+							moveClockDirection(1);
+						}
+						moveReverseClockDirection(2);
 					} else if(dir == -1) {
-						for(int i=0; i<7; i++)
-							tempArr[i] = gears[3][i+1];
-						tempArr[7] = gears[3][0];
-						for(int i=0; i<8; i++)
-							gears[3][i] = tempArr[i];
-						
-						for(int i=0; i<7; i++)
-							tempArr[i+1] = gears[2][i];
-						tempArr[0] = gears[2][7];
-						for(int i=0; i<8; i++)
-							gears[2][i] = tempArr[i];
+						if(gears[2][6] != gears[1][2]) {
+							if(gears[1][6] != gears[0][2]) {
+								moveClockDirection(0);
+							}
+							moveReverseClockDirection(1);
+						}
+						moveClockDirection(2);
 					}
+				}
+				if(dir == 1) {
+					moveClockDirection(3);
+					
+				} else {
+					moveReverseClockDirection(3);
+					
 				}
 				break;
 				default:
 			}
+//			System.out.println("#" + k + " dir : " + dir);
+//			for(int i=0; i<4; i++) {
+//				for(int j=0; j<8; j++) {
+//					if(j == 2 || j==6)
+//						System.out.print("["+gears[i][j]+"]" + " ");
+//					else
+//						System.out.print(gears[i][j] + " ");
+//				}
+//				System.out.println();
+//			}
+//			System.out.println();
 		}
 		
 		int sum = 0;
@@ -194,5 +160,21 @@ public class boj14891 {
 		if(gears[3][0] == 1) sum += 8;
 		
 		System.out.println(sum);
+	}
+	public static void moveClockDirection(int num) {
+		int[] tempArr = new int[8];
+		for(int i=0; i<7; i++)
+			tempArr[i+1] = gears[num][i];
+		tempArr[0] = gears[num][7];
+		for(int i=0; i<8; i++)
+			gears[num][i] = tempArr[i];
+	}
+	public static void moveReverseClockDirection(int num) {
+		int[] tempArr = new int[8];
+		for(int i=0; i<7; i++)
+			tempArr[i] = gears[num][i+1];
+		tempArr[7] = gears[num][0];
+		for(int i=0; i<8; i++)
+			gears[num][i] = tempArr[i];
 	}
 }
