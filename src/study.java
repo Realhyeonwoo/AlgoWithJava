@@ -4,45 +4,29 @@ import java.util.Stack;
 
 public class study {
 	public static void main(String[] args) {
-		System.out.println("Stack");
-		Stack<Integer> stk = new Stack<>();
-		
-		stk.push(7);
-		stk.push(5);
-		stk.push(4);
-		stk.pop();
-		
-		System.out.println("TOP : " + stk.peek());
-		System.out.println(stk.isEmpty());
-		
-		stk.push(1);
-		System.out.println("5값 위치 : " + stk.search(5));
-		System.out.println("값 포함 확인 : " + stk.contains(123));
-		
-		while(!stk.isEmpty()) {
-			System.out.println(stk.pop());
+		int[][] test = {{1}, {1}, {1,1}};
+		for(int i=0; i<test.length; i++) {
+			for(int j=0; j<test[i].length; j++) {
+				System.out.print(test[i][j] + " ");
+			}
+			System.out.println();
 		}
+		int[][] temp = new int[test.length][];
+		for(int y=0; y<test.length; y++) {
+			temp[y] = new int[test[y].length];
+		}
+		for(int y=0; y<test.length; y++) {
+			for(int x=0; x<test[y].length; x++) {
+				temp[x][test.length-y-1] = test[y][x];
 		
+			}
+		}
 		System.out.println();
-		
-		System.out.println("Queue");
-		Queue<Integer> queue = new LinkedList<>();
-		queue.add(7);
-		queue.add(5);
-		queue.add(4);
-		System.out.println(queue);
-		System.out.println(queue.poll());
-		System.out.println(queue);
-		queue.add(1);
-		System.out.println(queue);
-		System.out.println(queue.remove());
-		System.out.println(queue);
-		queue.add(1);
-		queue.add(2);
-		System.out.println(queue);
-		System.out.println(queue.remove(1));
-		System.out.println(queue);
-		queue.clear();
-		System.out.println(queue);
+		for(int y=0; y<temp.length; y++) {
+			for(int x=0; x<temp[y].length; x++) {
+				System.out.print(temp[y][x] + " ");
+			}
+			System.out.println();
+		}
 	}
 }
