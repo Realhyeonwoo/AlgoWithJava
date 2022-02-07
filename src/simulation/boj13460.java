@@ -22,7 +22,7 @@ public class boj13460 {
 	static char[][] arr;
 	static Pos rBall, bBall, hole;
 	static int ans = Integer.MAX_VALUE;
-	
+	static boolean isFail = false;
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -56,19 +56,20 @@ public class boj13460 {
 			
 			int cnt = 0;
 			boolean isDone = false;
-			System.out.println("+++++++++++++");
+//			System.out.println("+++++++++++++");
+			isFail = false;
 			for(int dir : dirs) {
 				cnt++;
 				if(inclineBoard(dir)) {
 					isDone = true;
 					break;
 				}
+				if(isFail) break;
 			}
 			
 			if(isDone)
 				ans = Math.min(ans, cnt);
 			
-			System.out.println("CNT: " + cnt);
 			for(int y=0; y<N; y++)
 				arr[y] = cloneMap[y].clone();
 			rBall = cloneRed;
@@ -87,7 +88,7 @@ public class boj13460 {
 		boolean isBlueDone = false;
 		boolean isRedMove = false;
 		boolean isBlueMove = false;
-		System.out.println("DIR : " + dir);
+//		System.out.println("DIR : " + dir);
 		switch(dir) {
 		case 0:
 				while(true) {
@@ -118,7 +119,8 @@ public class boj13460 {
 						isBlueDone = true;
 						arr[bBall.y][bBall.x] = '.';
 						bBall = new Pos(-3, -3);
-						break;
+						isFail = true;
+						return false;
 					}
 					if(arr[ny][nx] == '.') {
 						arr[ny][nx] = 'B';
@@ -127,6 +129,7 @@ public class boj13460 {
 					}
 				}
 				while(true) {
+					if(isBlueDone) return false;
 					int ny = rBall.y + dy[dir];
 					int nx = rBall.x + dx[dir];
 					
@@ -154,7 +157,8 @@ public class boj13460 {
 						isBlueDone = true;
 						arr[bBall.y][bBall.x] = '.';
 						bBall = new Pos(-3, -3);
-						break;
+						isFail = true;
+						return false;
 					}
 					if(arr[ny][nx] == '.') {
 						arr[ny][nx] = 'B';
@@ -192,7 +196,8 @@ public class boj13460 {
 					isBlueDone = true;
 					arr[bBall.y][bBall.x] = '.';
 					bBall = new Pos(-3, -3);
-					break;
+					isFail = true;
+					return false;
 				}
 				if(arr[ny][nx] == '.') {
 					arr[ny][nx] = 'B';
@@ -201,6 +206,7 @@ public class boj13460 {
 				}
 			}
 			while(true) {
+				if(isBlueDone) return false;
 				int ny = rBall.y + dy[dir];
 				int nx = rBall.x + dx[dir];
 				
@@ -228,7 +234,8 @@ public class boj13460 {
 					isBlueDone = true;
 					arr[bBall.y][bBall.x] = '.';
 					bBall = new Pos(-3, -3);
-					break;
+					isFail = true;
+					return false;
 				}
 				if(arr[ny][nx] == '.') {
 					arr[ny][nx] = 'B';
@@ -266,7 +273,8 @@ public class boj13460 {
 					isBlueDone = true;
 					arr[bBall.y][bBall.x] = '.';
 					bBall = new Pos(-3, -3);
-					break;
+					isFail = true;
+					return false;
 				}
 				if(arr[ny][nx] == '.') {
 					arr[ny][nx] = 'B';
@@ -275,6 +283,7 @@ public class boj13460 {
 				}
 			}
 			while(true) {
+				if(isBlueDone) return false;
 				int ny = rBall.y + dy[dir];
 				int nx = rBall.x + dx[dir];
 				
@@ -302,7 +311,8 @@ public class boj13460 {
 					isBlueDone = true;
 					arr[bBall.y][bBall.x] = '.';
 					bBall = new Pos(-3, -3);
-					break;
+					isFail = true;
+					return false;
 				}
 				if(arr[ny][nx] == '.') {
 					arr[ny][nx] = 'B';
@@ -340,7 +350,8 @@ public class boj13460 {
 					isBlueDone = true;
 					arr[bBall.y][bBall.x] = '.';
 					bBall = new Pos(-3, -3);
-					break;
+					isFail = true;
+					return false;
 				}
 				if(arr[ny][nx] == '.') {
 					arr[ny][nx] = 'B';
@@ -349,6 +360,7 @@ public class boj13460 {
 				}
 			}
 			while(true) {
+				if(isBlueDone) return false;
 				int ny = rBall.y + dy[dir];
 				int nx = rBall.x + dx[dir];
 				
@@ -376,7 +388,8 @@ public class boj13460 {
 					isBlueDone = true;
 					arr[bBall.y][bBall.x] = '.';
 					bBall = new Pos(-3, -3);
-					break;
+					isFail = true;
+					return false;
 				}
 				if(arr[ny][nx] == '.') {
 					arr[ny][nx] = 'B';
@@ -387,14 +400,15 @@ public class boj13460 {
 			break;
 			default:
 		}
-		System.out.println();
-		for(int y=0; y<N; y++) {
-			for(int x=0; x<M; x++) {
-				System.out.print(arr[y][x] + " ");
-			}
-			System.out.println();
-		}
-		if(isRedDone && !isBlueDone) return true;
+//		System.out.println();
+//		for(int y=0; y<N; y++) {
+//			for(int x=0; x<M; x++) {
+//				System.out.print(arr[y][x] + " ");
+//			}
+//			System.out.println();
+//		}
+		if(isBlueDone) return false;
+		else if(isRedDone && !isBlueDone) return true;
 		else return false;
 	}
 
