@@ -5,68 +5,68 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Set;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class study {
-	static int SIZE = 100000;
+	static int N, M;
+	static boolean[] visited;
+	static ArrayList<Integer> list = new ArrayList<>();
+	static ArrayList<Integer> input = new ArrayList<>();
+	static Set<String> set = new LinkedHashSet<>();
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringBuilder sb = new StringBuilder();
 		
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		int N = Integer.parseInt(st.nextToken());
-		int K = Integer.parseInt(st.nextToken());
+		N = Integer.parseInt(st.nextToken());
+		M = Integer.parseInt(st.nextToken());
 		
-		int[] visited = new int[SIZE + 1];
-		int[] history= new int[SIZE + 1];
-		Queue<Integer> q = new LinkedList<>();
-		q.add(N);
-		visited[N] = 1;
-		history[N] = N;
+		visited = new boolean[N];
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i<N; i++)
+			input.add(Integer.parseInt(st.nextToken()));
 		
-		while(!q.isEmpty()) {
-			int n = q.poll();
-			
-			if(n == K) {
-				sb.append(visited[n]-1 + "\n");
-				Stack<Integer> stk = new Stack<>();
-				while(history[n] != n) {
-					stk.add(n);
-					n = history[n];
-				}
-				sb.append(N + " ");
-				while(!stk.isEmpty()) 
-					sb.append(stk.pop() + " ");
-				break;
+		Collections.sort(input);
+		
+		dfs(0, 0);
+		
+		for(String str : set)
+			System.out.println(str);
+//		Iterator<String> iter = set.iterator();
+//		while(!iter.hasNext()) {
+//			System.out.println(iter.next());
+//		}
+	}
+		private static void dfs(int depth, int start) {
+		if(depth == M) {
+			String str = "";
+			for(int i=0; i<list.size(); i++) {
+				str += input.get(list.get(i)).toString();
+				str += " ";
 			}
-			
-			if(n*2<=SIZE && visited[n*2] == 0) {
-				visited[n*2] = visited[n] + 1;
-				history[n*2] = n;
-				q.add(n*2);
-			}
-			
-			if(n+1<=SIZE && visited[n+1] == 0) {
-				visited[n+1] = visited[n] + 1;
-				history[n+1] = n;
-				q.add(n+1);
-			}
-			
-			if(n-1>=0 && visited[n-1] == 0) {
-					visited[n-1] = visited[n] + 1;
-					history[n-1] = n;
-					q.add(n-1);
-			}
+			set.add(str);
+
+			return;
 		}
 		
-		bw.write(sb.toString());
-		bw.flush();
-		bw.close();
+		for(int i=start; i<N; i++) {
+//			if(visited[i]) continue;
+//			visited[i] = true;
+			list.add(i);
+			dfs(depth + 1, i);
+//			visited[i] = false;
+			list.remove(list.size()-1);
+		}
 	}
-	
 }
+
