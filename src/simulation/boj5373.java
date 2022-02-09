@@ -51,19 +51,19 @@ public class boj5373 {
 			if (dir == '+') {
 				for(int i=0; i<3; i++) {
 					cloneCube[F][0][i] = cube[R][0][i];
-					cloneCube[R][0][i] = cube[B][0][i];
-					cloneCube[B][0][i] = cube[L][0][i];
+					cloneCube[R][0][i] = cube[B][0][2-i];
+					cloneCube[B][0][2-i] = cube[L][0][i];
 					cloneCube[L][0][i] = cube[F][0][i];
 				}				
 			} else if (dir == '-') {
 				for(int i=0; i<3; i++) {
 					cloneCube[F][0][i] = cube[L][0][i];
+					cloneCube[L][0][i] = cube[B][0][2-i];
+					cloneCube[B][0][2-i] = cube[R][0][i];
 					cloneCube[R][0][i] = cube[F][0][i];
-					cloneCube[B][0][i] = cube[R][0][i];
-					cloneCube[L][0][i] = cube[B][0][i];
 				}
 			}
-			System.out.println("@@@@@@@== UU ==@@@@@@");
+			System.out.println("@@@@@@@== U ==@@@@@@");
 			for(int y=0; y<3; y++) {
 				for(int x=0; x<3; x++) {
 					System.out.print(cloneCube[U][y][x] + " ");
@@ -74,17 +74,18 @@ public class boj5373 {
 			break;
 		case 'D':
 			if (dir == '+') {
-				for(int i=0; i<3; i++) {
+				for(int i=0; i<3; i++) {		
+					
 					cloneCube[F][2][i] = cube[L][2][i];
+					cloneCube[L][2][i] = cube[B][2][2-i];
+					cloneCube[B][2][2-i] = cube[R][2][i];
 					cloneCube[R][2][i] = cube[F][2][i];
-					cloneCube[B][2][i] = cube[R][2][i];
-					cloneCube[L][2][i] = cube[B][2][i];
 				}				
 			} else if (dir == '-') {
 				for(int i=0; i<3; i++) {
 					cloneCube[F][2][i] = cube[R][2][i];
-					cloneCube[R][2][i] = cube[B][2][i];
-					cloneCube[B][2][i] = cube[L][2][i];
+					cloneCube[R][2][i] = cube[B][2][2-i];
+					cloneCube[B][2][2-i] = cube[L][2][i];
 					cloneCube[L][2][i] = cube[F][2][i];
 				}
 			}
@@ -100,17 +101,17 @@ public class boj5373 {
 		case 'F':
 			if (dir == '+') {
 				for(int i=0; i<3; i++) {
-					cloneCube[U][2][i] = cube[L][2-i][2];
-					cloneCube[L][2-i][2] = cube[D][2][i];
-					cloneCube[D][2][i] = cube[R][i][0];
-					cloneCube[R][i][0] = cube[U][2][i];
+					cloneCube[U][2][i] = cube[L][i][2];
+					cloneCube[L][i][2] = cube[D][2][i];
+					cloneCube[D][2][i] = cube[R][2-i][0];
+					cloneCube[R][2-i][0] = cube[U][2][2-i];
 				}
 			} else if (dir == '-') {
 				for(int i=0; i<3; i++) {
-					cloneCube[U][2][i] = cube[R][2-i][0];
-					cloneCube[R][2-i][0] = cube[D][2][i];
-					cloneCube[D][2][i] = cube[L][2-i][2];
-					cloneCube[L][2-i][2] = cube[U][2][i];
+					cloneCube[U][2][i] = cube[R][i][0];
+					cloneCube[R][i][0] = cube[D][2][2-i];
+					cloneCube[D][2][2-i] = cube[L][i][2];
+					cloneCube[L][i][2] = cube[U][2][2-i];
 				}
 			}
 			
@@ -127,15 +128,15 @@ public class boj5373 {
 			if (dir == '+') {
 				for(int i=0; i<3; i++) {
 					cloneCube[U][0][i] = cube[R][i][2];
-					cloneCube[R][i][2] = cube[D][0][i];
-					cloneCube[D][0][i] = cube[L][2-i][0];
+					cloneCube[R][i][2] = cube[D][2][2-i];
+					cloneCube[D][2][2-i] = cube[L][2-i][0];
 					cloneCube[L][2-i][0] = cube[U][0][i];
 				}
 			} else if (dir == '-') {
 				for(int i=0; i<3; i++) {
 					cloneCube[U][0][i] = cube[L][2-i][0];
-					cloneCube[L][2-i][0] = cube[D][0][i];
-					cloneCube[D][0][i] = cube[R][i][2];
+					cloneCube[L][2-i][0] = cube[D][0][2-i];
+					cloneCube[D][0][2-i] = cube[R][i][2];
 					cloneCube[R][i][2] = cube[U][0][i];
 				}
 			}
@@ -151,17 +152,17 @@ public class boj5373 {
 		case 'L':
 			if (dir == '+') {
 				for(int i=0; i<3; i++) {
-					cloneCube[U][i][0] = cube[B][i][2];
-					cloneCube[B][i][2] = cube[D][i][2];
-					cloneCube[D][i][2] = cube[F][2-i][0];
-					cloneCube[F][2-i][0] = cube[U][2-i][0];
+					cloneCube[F][i][0] = cube[U][i][0];
+					cloneCube[U][i][0] = cube[B][2-i][0];
+					cloneCube[B][2-i][0] = cube[D][2-i][0];
+					cloneCube[D][2-i][0] = cube[F][i][0];
 				}
 			} else if (dir == '-') {
 				for(int i=0; i<3; i++) {
+					cloneCube[F][i][0] = cube[D][2-i][0];
+					cloneCube[D][2-i][0] = cube[B][2-i][0];
+					cloneCube[B][2-i][0] = cube[U][i][0];
 					cloneCube[U][i][0] = cube[F][i][0];
-					cloneCube[F][i][0] = cube[D][2-i][2];
-					cloneCube[D][2-i][2] = cube[B][2-i][2];
-					cloneCube[B][2-i][2] = cube[U][i][0];
 				}
 			}
 			System.out.println("@@@@@@@== L ==@@@@@@");
@@ -219,5 +220,6 @@ public class boj5373 {
 			}
 			sb.append("\n");
 		}
+		sb.append("\n");
 	}
 }
