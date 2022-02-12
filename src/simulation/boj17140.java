@@ -36,7 +36,7 @@ public class boj17140 {
 			}
 		}
 		
-		for(int tc=0; tc<=100; tc++) {
+		for(int tc=0; tc<=99; tc++) {
 			if(arr[R][C] == K) {
 				ans = tc;
 				break;
