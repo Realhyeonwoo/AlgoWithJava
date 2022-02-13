@@ -2,71 +2,43 @@ package studyAlgo;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Set;
-import java.util.Stack;
-import java.util.StringTokenizer;
 
 public class study {
-	static int N, M;
-	static boolean[] visited;
-	static ArrayList<Integer> list = new ArrayList<>();
-	static ArrayList<Integer> input = new ArrayList<>();
-	static Set<String> set = new LinkedHashSet<>();
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringBuilder sb = new StringBuilder();
 		
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		N = Integer.parseInt(st.nextToken());
-		M = Integer.parseInt(st.nextToken());
+		int N = Integer.parseInt(br.readLine());
+		int[] d = new int[N+1];
+		int[] h = new int[N+1];
+		d[1] = 0;
 		
-		visited = new boolean[N];
-		st = new StringTokenizer(br.readLine());
-		for(int i=0; i<N; i++)
-			input.add(Integer.parseInt(st.nextToken()));
-		
-		Collections.sort(input);
-		
-		dfs(0, 0);
-		
-		for(String str : set)
-			System.out.println(str);
-//		Iterator<String> iter = set.iterator();
-//		while(!iter.hasNext()) {
-//			System.out.println(iter.next());
-//		}
-	}
-		private static void dfs(int depth, int start) {
-		if(depth == M) {
-			String str = "";
-			for(int i=0; i<list.size(); i++) {
-				str += input.get(list.get(i)).toString();
-				str += " ";
+		for(int i=2; i<=N; i++) {
+			d[i] = d[i-1] + 1;
+			h[i] = i-1;
+			if(i%3 == 0 && d[i/3]+1 < d[i]) {
+				d[i] = d[i/3] + 1;
+				h[i] = i/3;
 			}
-			set.add(str);
-
-			return;
+			if(i%2 == 0 && d[i/2]+1 < d[i]) {
+				d[i] = d[i/2] + 1;
+				h[i] = i/2;
+			}
 		}
 		
-		for(int i=start; i<N; i++) {
-//			if(visited[i]) continue;
-//			visited[i] = true;
-			list.add(i);
-			dfs(depth + 1, i);
-//			visited[i] = false;
-			list.remove(list.size()-1);
+		sb.append(d[N] + "\n");
+		int cur = N;
+		while(cur != 1) {
+			sb.append(cur + " ");
+			cur = h[cur];
 		}
+		sb.append(1);
+		bw.write(sb.toString());
+		bw.flush();
+		bw.close();
 	}
 }
-
