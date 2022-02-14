@@ -17,5 +17,6 @@ public class boj2193 {
 		}
 		
 		System.out.println(d[N][0] + d[N][1]);
+		
 	}
 }
