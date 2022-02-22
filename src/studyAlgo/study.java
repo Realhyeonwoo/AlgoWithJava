@@ -6,39 +6,51 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 public class study {
-	
+
 	public static void main(String[] args) throws Exception {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringBuilder sb = new StringBuilder();
+		String str = solution("3people unFollowed me");
+		System.out.println(str);
+		str = solution("for the last week");
+		System.out.println(str);
+//		str = solution("3ab   ab");
+//		System.out.println(str);
 		
-		int N = Integer.parseInt(br.readLine());
-		int[] d = new int[N+1];
-		int[] h = new int[N+1];
-		d[1] = 0;
-		
-		for(int i=2; i<=N; i++) {
-			d[i] = d[i-1] + 1;
-			h[i] = i-1;
-			if(i%3 == 0 && d[i/3]+1 < d[i]) {
-				d[i] = d[i/3] + 1;
-				h[i] = i/3;
+		String a = "3ab   ab";
+		a = a.replaceFirst(a.charAt(0) + "", Character.toUpperCase(a.charAt(0)) + "");
+	}
+
+	public static String solution(String s) {
+		String answer = "";
+		// 공백(" ")으로 분리
+		String[] strArr = s.split(" ");
+		// 첫 문자가 숫자일 때
+		if (Character.isDigit(strArr[0].charAt(0))) {
+			answer += strArr[0].toLowerCase() + " ";
+			for (int i = 1; i < strArr.length; i++) {
+				if (strArr[i] == " ") {
+					answer += " ";
+					continue;
+				}
+				strArr[i] = strArr[i].toLowerCase();
+				strArr[i] = strArr[i].replaceFirst(strArr[i].charAt(0) + "", Character.toUpperCase(strArr[i].charAt(0)) + "");
+
+				answer += strArr[i] + " ";
 			}
-			if(i%2 == 0 && d[i/2]+1 < d[i]) {
-				d[i] = d[i/2] + 1;
-				h[i] = i/2;
+			// 첫 문자가 숫자가 아닐 때
+		} else {
+			for (int i = 0; i < strArr.length; i++) {
+				if (strArr[i] == " ") {
+					answer += " ";
+					continue;
+				}
+				strArr[i] = strArr[i].toLowerCase();
+				strArr[i] = strArr[i].replaceFirst(strArr[i].charAt(0) + "",
+						Character.toUpperCase(strArr[i].charAt(0)) + "");
+				answer += strArr[i] + " ";
 			}
 		}
-		
-		sb.append(d[N] + "\n");
-		int cur = N;
-		while(cur != 1) {
-			sb.append(cur + " ");
-			cur = h[cur];
-		}
-		sb.append(1);
-		bw.write(sb.toString());
-		bw.flush();
-		bw.close();
+
+		answer = answer.substring(0, answer.length() - 1);
+		return answer;
 	}
 }
