@@ -1,46 +1,48 @@
-package studyAlgo;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 public class boj9663 {
-	static int cnt;
-	static boolean[] visitedSero;
-	static boolean[] visitedDowncross;
-	static boolean[] visitedUpcross;
+	static int N;
+	static boolean[] visitedVertical; // j
+	static boolean[] visitedRightCross; // i-j 
+	static boolean[] visitedLeftCross; //i+j
+	static int answer;
 	
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
-		int N = Integer.parseInt(br.readLine());
-		int[][] arr = new int[N][N];
-		visitedSero = new boolean[N];
-		visitedDowncross = new boolean[30];
-		visitedUpcross = new boolean[30];
-
-		backTracking(0, N);
-
-		System.out.println(cnt);
+		
+		N = Integer.parseInt(br.readLine());
+		visitedVertical = new boolean[N];
+		visitedRightCross = new boolean[N*2];
+		visitedLeftCross = new boolean[N*2];
+		
+		backTracking(0);
+		
+		System.out.println(answer);
 	}
 
-	private static void backTracking(int depth, int n) {
-		if (depth == n) {
-			cnt++;
+	private static void backTracking(int depth) {
+		if(depth == N) {
+			answer++;
 			return;
 		}
 		
-		for(int i=0; i<n; i++) {
-			if(visitedSero[i] || visitedUpcross[depth+i] || visitedDowncross[depth-i+n-1]) continue;
-			visitedSero[i] = true;
-			visitedUpcross[depth + i] = true;
-			visitedDowncross[depth - i + n -1] = true;
-			backTracking(depth+1, n);
-			visitedSero[i] = false;
-			visitedUpcross[depth + i] = false;
-			visitedDowncross[depth - i + n -1] = false;
+		for(int i=0; i<N; i++) {
+			if(visitedVertical[i] || visitedRightCross[depth-i+N-1] || visitedLeftCross[depth+i]) continue;
+			
+			visitedVertical[i] = true;
+			visitedRightCross[depth-i+N-1] = true;
+			visitedLeftCross[depth+i] = true;
+
+			backTracking(depth + 1);
+			
+			visitedVertical[i] = false;
+			visitedRightCross[depth-i+N-1] = false;
+			visitedLeftCross[depth+i] = false;
 		}
 	}
 }
