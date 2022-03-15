@@ -8,6 +8,9 @@ import java.io.OutputStreamWriter;
 public class study {
 
 	public static void main(String[] args) throws Exception {
+		String t = "abc  d";
+		String[] tr = t.split(" ");
+		System.out.println(tr[1].trim().length());
 		String str = solution("3people unFollowed me");
 		System.out.println(str);
 		str = solution("for the last week");
