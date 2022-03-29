@@ -1,4 +1,4 @@
-package programmers.lv2;
+package programmers.level2;
 
 public class N개의최소공배수 {
 	public static void main(String[] args) {
@@ -8,10 +8,10 @@ public class N개의최소공배수 {
 	public static int solution(int[] arr) {
 		int answer = 0;
 
-		// 가장 큰 수 찾기
+		// 媛��옣 �겙 �닔 李얘린
 		for (int num : arr)
 			answer = Math.max(answer, num);
-		// 최소공배수 찾기
+		// 理쒖냼怨듬같�닔 李얘린
 		int idx = 1;
 		while (true) {
 			int num = answer * idx;

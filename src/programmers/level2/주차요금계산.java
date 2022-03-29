@@ -1,4 +1,4 @@
-package programmers.lv2;
+package programmers.level2;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,24 +35,24 @@ public class 주차요금계산 {
 	}
 
 	public static int[] solution(int[] fees, String[] records) {
-		// 차량별 시간 저장 MAP<차량번호, 차량시간>
+		// 李⑤웾蹂� �떆媛� ���옣 MAP<李⑤웾踰덊샇, 李⑤웾�떆媛�>
 		Map<String, Integer> carTimeRecord = new HashMap<>();
-		// 주차장MAP <차량번호 : 입차시간>
+		// 二쇱감�옣MAP <李⑤웾踰덊샇 : �엯李⑥떆媛�>
 		Map<String, String> parkRecord = new HashMap<>();
-		// record 순회하여 차량 시간 계산
+		// record �닚�쉶�븯�뿬 李⑤웾 �떆媛� 怨꾩궛
 		for (String str : records) {
-			// 정보 파싱
+			// �젙蹂� �뙆�떛
 			String[] info = str.split(" ");
 			String time = info[0];
 			String number = info[1];
 			String status = info[2];
-			// IN : 주차장 MAP 저장
+			// IN : 二쇱감�옣 MAP ���옣
 			if (status.equals("IN")) {
 				parkRecord.put(number, time);
-				// OUT : 주차장 MAP 출고
+				// OUT : 二쇱감�옣 MAP 異쒓퀬
 			} else if (status.equals("OUT")) {
 				int t = calcTime(parkRecord.get(number), time);
-				// 전에 부관된 요금이 있는지 확인 필요
+				// �쟾�뿉 遺�愿��맂 �슂湲덉씠 �엳�뒗吏� �솗�씤 �븘�슂
 				if (carTimeRecord.containsKey(number)) {
 					int preTime = carTimeRecord.get(number);
 					t += preTime;
@@ -61,7 +61,7 @@ public class 주차요금계산 {
 				parkRecord.remove(number);
 			}
 		}
-		// parkRecord에 남아있는 차량 시간 정산
+		// parkRecord�뿉 �궓�븘�엳�뒗 李⑤웾 �떆媛� �젙�궛
 		for (String number : parkRecord.keySet()) {
 			int time = calcTime(parkRecord.get(number), END_TIME);
 			if (carTimeRecord.containsKey(number)) {
@@ -70,14 +70,14 @@ public class 주차요금계산 {
 			}
 			carTimeRecord.put(number, time);
 		}
-		// 요금 계산 하여 Car List에 저장 및 정렬
+		// �슂湲� 怨꾩궛 �븯�뿬 Car List�뿉 ���옣 諛� �젙�젹
 		ArrayList<Car> list = new ArrayList<>();
 		for (String number : carTimeRecord.keySet()) {
 			int fee = (int) calcFee(carTimeRecord.get(number), fees);
 			list.add(new Car(number, fee));
 		}
 		Collections.sort(list);
-		// 차량별 요금 배열에 저장
+		// 李⑤웾蹂� �슂湲� 諛곗뿴�뿉 ���옣
 		int[] answer = new int[list.size()];
 		for (int i = 0; i < list.size(); i++)
 			answer[i] = list.get(i).fee;

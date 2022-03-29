@@ -1,4 +1,4 @@
-package programmers.lv2;
+package programmers.level2;
 
 import java.util.ArrayList;
 
@@ -8,7 +8,7 @@ public class 기능개발 {
 	}
 	
     public int[] solution(int[] progresses, int[] speeds) {
-        //남은 일수 구하기
+        //�궓�� �씪�닔 援ы븯湲�
         int[] days = new int[progresses.length];
         for(int i=0; i<progresses.length; i++) {
             for(int d=1; d<100; d++) {
@@ -18,7 +18,7 @@ public class 기능개발 {
                 }
             }
         }
-        //남은 일수 최댓값이 바뀔때까지 모아서 배포
+        //�궓�� �씪�닔 理쒕뙎媛믪씠 諛붾�붾븣源뚯� 紐⑥븘�꽌 諛고룷
         ArrayList<Integer> outputList = new ArrayList<>();
         int idx = 0;
         while(idx < days.length) {
@@ -42,7 +42,7 @@ public class 기능개발 {
                 }
             }
         }
-        // 결과 리턴 
+        // 寃곌낵 由ы꽩 
         int[] answer = new int[outputList.size()];
         for(int i=0; i<answer.length; i++) 
             answer[i] = outputList.get(i);

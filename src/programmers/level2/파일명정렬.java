@@ -1,9 +1,9 @@
-package programmers;
+package programmers.level2;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class íŒŒì¼ëª…ì •ë ¬ {
+public class ÆÄÀÏ¸íÁ¤·Ä {
 	static class File implements Comparable<File> {
 		int index;
 		String head;
