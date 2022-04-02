@@ -3,7 +3,7 @@ package programmers.level2;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class ÆÄÀÏ¸íÁ¤·Ä {
+public class íŒŒì¼ëª…ì •ë ¬ {
 	static class File implements Comparable<File> {
 		int index;
 		String head;
