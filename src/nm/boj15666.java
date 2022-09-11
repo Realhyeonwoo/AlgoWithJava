@@ -1,51 +1,59 @@
 package nm;
 
-import java.util.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.StringTokenizer;
 
 public class boj15666 {
-	static int N, M;
-	static int[] input;
-	static ArrayList<Integer> list = new ArrayList<>();
-	static Set<String> output = new LinkedHashSet<>();
 	
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringBuilder sb = new StringBuilder();
+		BufferedWriter bw= new BufferedWriter(new OutputStreamWriter(System.out));
 		
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		N = Integer.parseInt(st.nextToken());
-		M = Integer.parseInt(st.nextToken());
-		input = new int[N];
+		int N = Integer.parseInt(st.nextToken());
+		int M = Integer.parseInt(st.nextToken());
 		st = new StringTokenizer(br.readLine());
-		for(int i=0; i<N; i++)
-			input[i] = Integer.parseInt(st.nextToken());
-		Arrays.sort(input);
+		int[] arr = new int[N];
+		int idx = 0;
+		while(st.hasMoreTokens()) {
+			arr[idx++] = Integer.parseInt(st.nextToken());
+		}
+		Arrays.sort(arr);
 		
-		dfs(0, 0);
+		Set<String> set = new LinkedHashSet<>();
+		ArrayList<Integer> list = new ArrayList<>();
+		dupCombination(0, 0, M, arr, list, set);
 		
-		for(String str : output)
+		StringBuilder sb = new StringBuilder();
+		for(String str : set)
 			sb.append(str + "\n");
 		bw.write(sb.toString());
 		bw.flush();
 		bw.close();
 	}
 	
-	public static void dfs(int depth, int start) {
-		if(depth == M) {
+	private static void dupCombination(int cnt, int start, int m, int[] arr, ArrayList<Integer> list, Set<String> set) {
+		if(cnt == m) {
 			String str = "";
-			for(int v : list)
-				str = str + v + " ";
-			output.add(str);
+			for(int idx : list)
+				str += Integer.toString(arr[idx]) + " ";
+			set.add(str);
 			return;
-	 	}
-		
-		for(int i=start; i<N; i++) {
-			list.add(input[i]);
-			dfs(depth + 1, i);
-			list.remove(list.size()-1);
 		}
 		
+		for(int i=start; i<arr.length; i++) {
+			list.add(i);
+			dupCombination(cnt+1, i, m, arr, list, set);
+			list.remove(list.size() - 1);
+			
+		}
 	}
+		
 }
