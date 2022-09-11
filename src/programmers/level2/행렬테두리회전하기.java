@@ -1,6 +1,6 @@
 package programmers.level2;
 
-public class Çà·ÄÅ×µÎ¸®È¸ÀüÇÏ±â {
+public class í–‰ë ¬í…Œë‘ë¦¬íšŒì „í•˜ê¸° {
 	public static void main(String[] args) {
 		int row = 6;
 		int columns = 6;
