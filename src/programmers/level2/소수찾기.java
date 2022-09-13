@@ -17,11 +17,11 @@ public class 소수찾기 {
 	static private int solution(String numbers) {
 		/**
 		 * 
-		 * 1. numbers 1 ~ nubers.length 만큼 숫자 선택
-		 * 2. 선택된 숫자 갯수데로 순열 리스트 생성
-		 * 3. 생성된 숫자 소수 인지 판별
-		 *  - 소수이면 Set에 저장
-		 * 4. set size() 값 리턴
+		 * 1. numbers 1 ~ nubers.length 留뚰겮 �닽�옄 �꽑�깮
+		 * 2. �꽑�깮�맂 �닽�옄 媛��닔�뜲濡� �닚�뿴 由ъ뒪�듃 �깮�꽦
+		 * 3. �깮�꽦�맂 �닽�옄 �냼�닔 �씤吏� �뙋蹂�
+		 *  - �냼�닔�씠硫� Set�뿉 ���옣
+		 * 4. set size() 媛� 由ы꽩
 		 * 
 		 */
 		Set<Integer> ansSet = new HashSet<>();

@@ -16,22 +16,22 @@ public class 뉴스클러스트링 {
 	public static int solution(String str1, String str2) {
 		int answer = 1 * VALUE;
 
-		// String을 문제 규칙에 따라 집합으로 만들기
+		// String�쓣 臾몄젣 洹쒖튃�뿉 �뵲�씪 吏묓빀�쑝濡� 留뚮뱾湲�
 		ArrayList<String> list1 = new ArrayList<>();
 		ArrayList<String> list2 = new ArrayList<>();
 		makeSet(str1, list1);
 		makeSet(str2, list2);
 
-		// 둘다 공집합인 경우 초기값으로 리턴
+		// �몮�떎 怨듭쭛�빀�씤 寃쎌슦 珥덇린媛믪쑝濡� 由ы꽩
 		if (list1.size() == 0 && list2.size() == 0)
 			return answer;
 
-		// 교집합 갯수 구하기
+		// 援먯쭛�빀 媛��닔 援ы븯湲�
 		double num1 = makeintersection(list1, list2);
-		// 합집합 갯수 구하기
+		// �빀吏묓빀 媛��닔 援ы븯湲�
 		double num2 = makeUnion(list1, list2);
 
-		// 결과갑 연산하여 리턴
+		// 寃곌낵媛� �뿰�궛�븯�뿬 由ы꽩
 		answer = (int) ((num1 / num2) * VALUE);
 		return answer;
 	}
