@@ -3,7 +3,7 @@ package programmers.level2;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Àü·Â¸ÁÀ»_µÑ·Î_³ª´©±â {
+public class ì „ë ¥ë§ì„_ë‘˜ë¡œ_ë‚˜ëˆ„ê¸° {
 
 	public static void main(String[] args) {
 		

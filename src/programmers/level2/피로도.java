@@ -2,7 +2,7 @@ package programmers.level2;
 
 import java.util.ArrayList;
 
-public class �Ƿε� {
+public class 피로도 {
 
 	public static void main(String[] args) {
 		int k = 80;

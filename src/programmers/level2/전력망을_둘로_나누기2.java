@@ -1,6 +1,6 @@
 package programmers.level2;
 
-public class Àü·Â¸ÁÀ»_µÑ·Î_³ª´©±â2 {
+public class ì „ë ¥ë§ì„_ë‘˜ë¡œ_ë‚˜ëˆ„ê¸°2 {
 	
 	public static void main(String[] args) {
 		

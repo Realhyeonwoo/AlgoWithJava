@@ -1,6 +1,6 @@
 package programmers.level3;
 
-public class µğ½ºÅ©ÄÁÆ®·Ñ·¯ {
+public class ë””ìŠ¤í¬ì»¨íŠ¸ë¡¤ëŸ¬ {
 
 	public static void main(String[] args) {
 		solution();
