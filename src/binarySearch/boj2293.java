@@ -34,7 +34,7 @@ public class boj2293 {
 		int answer = Integer.MIN_VALUE;
 		for(int i=0; i<N; i++) {
 			for(int j=0; j<N; j++) {
-				if((arr[i] - arr[j]) <= 0) continue;
+				if((arr1[i] - arr2[j]) <= 0) continue;
 				if(hasNum(arr, arr1[i] - arr2[j])) {
 					answer = Math.max(answer, arr1[i]);
 				}
